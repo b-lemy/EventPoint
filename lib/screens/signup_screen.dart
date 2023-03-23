@@ -1,0 +1,150 @@
+import 'package:digital_invitation_card/screens/login_screen.dart';
+import 'package:flutter/material.dart';
+import 'package:intl_phone_field/intl_phone_field.dart';
+
+class SignUpScreen extends StatefulWidget {
+  const SignUpScreen({super.key});
+
+  @override
+  State<SignUpScreen> createState() => _SignUpScreenState();
+}
+
+class _SignUpScreenState extends State<SignUpScreen> {
+  final _formKey = GlobalKey<FormState>();
+  @override
+  Widget build(BuildContext context) {
+    return  Scaffold(
+      
+      body: SingleChildScrollView(
+        child: Form(
+        
+          key: _formKey,
+          child: Padding(
+          
+            padding: const EdgeInsets.fromLTRB(8.0, 0,8.0, 8.0),
+            child: Column(
+              
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                 SizedBox(height: 300,
+             width: 200,
+             child:Image.asset('assets/Group 300.png'),
+              ),
+                 TextFormField(
+                  decoration:const InputDecoration(labelText: "Username", border: OutlineInputBorder(),
+                   focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.teal)),),
+                  // The validator receives the text that the user has entered.
+                  validator: (value) {
+                    if (value == null || value.isEmpty) {
+                      return 'Please enter username';
+                    }
+                    return null;
+                  },
+                ),
+                const SizedBox(height: 12,),
+               IntlPhoneField(
+    decoration: const InputDecoration(
+        labelText: 'Phone Number',
+        border: OutlineInputBorder(
+            borderSide: BorderSide(),
+        ),
+    ),
+    initialCountryCode: '+255',
+    onChanged: (phone) {
+    },
+),
+                //  TextFormField(
+                //   decoration: const InputDecoration(labelText: "Phone number", border: OutlineInputBorder(),
+                //    focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.teal)),),
+                //   // The validator receives the text that the user has entered.
+                //   validator: (value) {
+                //     if (value == null || value.isEmpty) {
+                //       return 'Please enter Phone number';
+                //     }
+                //     return null;
+                //   },
+                // ),
+                const SizedBox(height: 12,),
+                 TextFormField( obscureText: true,
+                  decoration:const  InputDecoration(labelText: "Password",suffixIcon: Icon(Icons.lock),
+                   border: OutlineInputBorder(),
+                   focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.teal)),),
+                  // The validator receives the text that the user has entered.
+                  validator: (value) {
+                    if (value == null || value.isEmpty) {
+                      return 'Please enter Password';
+                    }
+                    return null;
+                  },
+                ),
+                const SizedBox(height: 12,),
+                 TextFormField(obscureText: true,
+                   decoration:const InputDecoration(
+                  labelText: "Confirm password", suffixIcon: Icon(Icons.lock),
+                  border: OutlineInputBorder(),
+                   focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.teal)),),
+                // The validator receives the text that the user has entered.
+                validator: (value) {
+                  if (value == null || value.isEmpty) {
+                    return 'Please enter Password';
+                  }
+                  return null;
+                },
+              ),
+              const SizedBox(height: 12,),
+               Container(
+                 height: 50,
+                 width: 1500,
+                 decoration: const BoxDecoration(
+                    borderRadius: BorderRadius.all(Radius.circular(6)),
+                                 color: Colors.black
+                 ),
+               
+                 child: ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: Colors.teal
+                  ),
+                   onPressed: () {
+                     // Validate returns true if the form is valid, or false otherwise.
+                     if (_formKey.currentState!.validate()) {
+                       // If the form is valid, display a snackbar. In the real world,
+                       // you'd often call a server or save the information in a database.
+                       ScaffoldMessenger.of(context).showSnackBar(
+                         const SnackBar(content: Text('Processing Data')),
+                       );
+                     }
+                   },
+                   
+                   child: const Text('SignUp'),
+                 ),
+               ),
+           const SizedBox( height: 10,),
+           Row(
+                         mainAxisAlignment: MainAxisAlignment.center,
+                         children: [
+                           const Text("Already have an Account?",
+                             style: TextStyle(color: Colors.black,
+                               ),
+                           ),
+                           TextButton(
+                             onPressed: () => {
+                                  Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => const LoginScreen()),)
+            },
+                             child:const Text("Login",
+                               style: TextStyle(
+                                   color: Colors.teal, fontWeight: FontWeight.bold,
+                               ),
+                             ),
+                           )
+                         ],
+                       ),
+              ],
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+}
