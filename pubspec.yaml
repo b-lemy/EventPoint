@@ -37,6 +37,8 @@ dependencies:
   carousel_indicator: ^1.0.6
   flutter_native_splash: ^2.2.19
   intl_phone_field: ^3.1.0
+  introduction_screen: ^3.1.7
+  
 
 dev_dependencies:
   flutter_test:
