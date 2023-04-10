@@ -12,6 +12,7 @@ class SignUpScreen extends StatefulWidget {
 
 class _SignUpScreenState extends State<SignUpScreen> {
   final _formKey = GlobalKey<FormState>();
+  late String phoneNumber;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -62,7 +63,9 @@ class _SignUpScreenState extends State<SignUpScreen> {
                     ),
                   ),
                   initialCountryCode: '+255',
-                  onChanged: (phone) {},
+                  onChanged: (phone) {
+                    phoneNumber = phone as String;
+                  },
                 ),
                 //  TextFormField(
                 //   decoration: const InputDecoration(labelText: "Phone number", border: OutlineInputBorder(),

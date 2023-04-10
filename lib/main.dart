@@ -1,10 +1,5 @@
-//import 'package:digital_invitation_card/screens/login_screen.dart';
-//import 'package:digital_invitation_card/screens/login_screen.dart';
+import 'package:digital_invitation_card/screens/homepage.dart';
 import 'package:digital_invitation_card/screens/splash_screen.dart';
-//import 'package:digital_invitation_card/screens/verification.dart';
-//import 'package:digital_invitation_card/screens/signup_screen.dart';
-//import 'package:digital_invitation_card/screens/onboarding_screen.dart';
-//import 'package:digital_invitation_card/screens/splash_screen.dart';
 import 'package:flutter/material.dart';
 
 void main() {

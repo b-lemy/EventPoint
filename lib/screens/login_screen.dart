@@ -1,4 +1,5 @@
 import 'package:digital_invitation_card/screens/home.dart';
+import 'package:digital_invitation_card/screens/homepage.dart';
 import 'package:digital_invitation_card/screens/signup_screen.dart';
 import 'package:flutter/material.dart';
 
@@ -10,6 +11,7 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
+  String phoneNumber = "";
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -35,8 +37,8 @@ class _LoginScreenState extends State<LoginScreen> {
             const SizedBox(
               height: 10,
             ),
-            const TextField(
-              decoration: InputDecoration(
+            TextField(
+              decoration: const InputDecoration(
                 labelText: "Phone number",
                 hintText: "Enter phone number",
                 border: OutlineInputBorder(
@@ -46,6 +48,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     borderSide: BorderSide(color: Color(0xFFFCB549))),
               ),
               keyboardType: TextInputType.number,
+              onChanged: (value) => phoneNumber = value,
             ),
             const SizedBox(
               height: 10,
@@ -76,9 +79,13 @@ class _LoginScreenState extends State<LoginScreen> {
             ),
             GestureDetector(
               onTap: () {
+              
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => const HomeScreen()),
+                  MaterialPageRoute(
+                      builder: (context) => HomepageScreen(
+                            phoneNumber: phoneNumber,
+                          )),
                 );
               },
               child: Container(
@@ -101,7 +108,7 @@ class _LoginScreenState extends State<LoginScreen> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 const Text(
-                  "Don't have an account?",
+                  "Don't have an account ?",
                   style: TextStyle(
                     color: Colors.black,
                   ),

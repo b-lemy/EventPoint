@@ -1,4 +1,4 @@
-import 'package:digital_invitation_card/screens/home.dart';
+import 'package:digital_invitation_card/screens/login_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
@@ -20,6 +20,7 @@ class OtpScreen extends StatelessWidget {
                 style: TextStyle(fontWeight: FontWeight.bold, fontSize: 30),
               ),
               const Text("Enter OTP code we sent to +2557892*****"),
+
               const SizedBox(
                 height: 80,
               ),
@@ -146,7 +147,7 @@ class OtpScreen extends StatelessWidget {
                 onTap: () {
                   Navigator.push(
                     context,
-                    MaterialPageRoute(builder: (context) => const HomeScreen()),
+                    MaterialPageRoute(builder: (context) => const LoginScreen()),
                   );
                 },
                 child: Container(
