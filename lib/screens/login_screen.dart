@@ -1,4 +1,3 @@
-import 'package:digital_invitation_card/screens/home.dart';
 import 'package:digital_invitation_card/screens/homepage.dart';
 import 'package:digital_invitation_card/screens/signup_screen.dart';
 import 'package:flutter/material.dart';
