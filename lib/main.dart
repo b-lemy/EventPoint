@@ -1,5 +1,6 @@
-import 'package:digital_invitation_card/screens/homepage.dart';
+//import 'package:digital_invitation_card/screens/imageslider.dart';
 import 'package:digital_invitation_card/screens/splash_screen.dart';
+//import 'package:digital_invitation_card/screens/splash_screen.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -12,7 +13,7 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
+    return  const MaterialApp(
       debugShowCheckedModeBanner: false,
       home: SplashScreen(),
     );
