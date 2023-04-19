@@ -1,3 +1,5 @@
+import 'package:digital_invitation_card/screens/event.dart';
+import 'package:digital_invitation_card/screens/imageslider.dart';
 import 'package:flutter/material.dart';
 import 'package:digital_invitation_card/screens/notification.dart';
 
@@ -27,22 +29,24 @@ class _HomepageScreenState extends State<HomepageScreen> {
                     icon: Icons.qr_code_2_outlined,
                     label: "Event",
                     label2: "Manage Events",
+                    navi: "EventScreen()",
                   ),
                   MyButton(
                     icon: Icons.search,
                     label: "Invitations",
                     label2: "Managing Invitations",
+                    navi: "EventScreen()",
                   ),
                   MyButton(
-                    icon: Icons.support_agent,
-                    label: "Support",
-                    label2: "Get Help & Support",
-                  ),
+                      icon: Icons.support_agent,
+                      label: "Support",
+                      label2: "Get Help & Support",
+                      navi: "NotificationScreen()"),
                   MyButton(
-                    icon: Icons.settings,
-                    label: "Settings",
-                    label2: "Manage App Settings",
-                  ),
+                      icon: Icons.settings,
+                      label: "Settings",
+                      label2: "Manage App Settings",
+                      navi: "NotificationScreen()"),
                 ],
               ),
             ),
@@ -86,22 +90,20 @@ class _HomepageScreenState extends State<HomepageScreen> {
           //       width: MediaQuery.of(context).size.width * 0.9,
           // child:
           Padding(
-            padding: const EdgeInsets.fromLTRB(8, 190, 8, 0),
+            padding: const EdgeInsets.fromLTRB(28, 190, 28, 0),
             child: Container(
               width: 380,
               height: 170,
               decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(4), color: Colors.white),
-              child: Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Container(
-                  color: Colors.green,
-                  child: Container(),
+              child: const Padding(
+                padding: EdgeInsets.all(8.0),
+                child: SizedBox(
+                  child: ImageSlider(),
                 ),
               ),
             ),
           ),
-          Container()
         ],
       ),
     );
@@ -112,12 +114,15 @@ class MyButton extends StatelessWidget {
   final IconData icon;
   final String label;
   final String label2;
+  final String navi;
 
-  const MyButton(
-      {super.key,
-      required this.icon,
-      required this.label,
-      required this.label2});
+  const MyButton({
+    super.key,
+    required this.icon,
+    required this.label,
+    required this.label2,
+    required this.navi,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -125,7 +130,12 @@ class MyButton extends StatelessWidget {
       decoration: BoxDecoration(
           color: Colors.white, borderRadius: BorderRadius.circular(5)),
       child: InkWell(
-        onTap: () {},
+        onTap: () {
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => const EventScreen()),
+          );
+        },
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
