@@ -3,6 +3,8 @@ import 'package:digital_invitation_card/screens/imageslider.dart';
 import 'package:flutter/material.dart';
 import 'package:digital_invitation_card/screens/notification.dart';
 
+import 'invitations_list_screen.dart';
+
 class HomepageScreen extends StatefulWidget {
   const HomepageScreen({super.key, required String phoneNumber});
 
@@ -26,27 +28,25 @@ class _HomepageScreenState extends State<HomepageScreen> {
                 mainAxisSpacing: 12,
                 children: const <Widget>[
                   MyButton(
-                    icon: Icons.qr_code_2_outlined,
-                    label: "Event",
-                    label2: "Manage Events",
-                    navi: "EventScreen()",
-                  ),
+                      icon: Icons.qr_code_2_outlined,
+                      label: "Event",
+                      label2: "Manage Events",
+                      screenToNavigate: EventScreen()),
                   MyButton(
-                    icon: Icons.search,
-                    label: "Invitations",
-                    label2: "Managing Invitations",
-                    navi: "EventScreen()",
-                  ),
+                      icon: Icons.search,
+                      label: "Invitations",
+                      label2: "Managing Invitations",
+                      screenToNavigate: NotificationScreen()),
                   MyButton(
                       icon: Icons.support_agent,
                       label: "Support",
                       label2: "Get Help & Support",
-                      navi: "NotificationScreen()"),
+                      screenToNavigate: NotificationScreen()),
                   MyButton(
                       icon: Icons.settings,
                       label: "Settings",
                       label2: "Manage App Settings",
-                      navi: "NotificationScreen()"),
+                      screenToNavigate: NotificationScreen()),
                 ],
               ),
             ),
@@ -114,14 +114,14 @@ class MyButton extends StatelessWidget {
   final IconData icon;
   final String label;
   final String label2;
-  final String navi;
+  final Widget screenToNavigate;
 
   const MyButton({
     super.key,
     required this.icon,
     required this.label,
     required this.label2,
-    required this.navi,
+    required this.screenToNavigate,
   });
 
   @override
@@ -133,7 +133,7 @@ class MyButton extends StatelessWidget {
         onTap: () {
           Navigator.push(
             context,
-            MaterialPageRoute(builder: (context) => const EventScreen()),
+            MaterialPageRoute(builder: (context) => screenToNavigate),
           );
         },
         child: Column(

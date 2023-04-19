@@ -5,6 +5,7 @@ class InvitationsDetailScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final Size size = MediaQuery.of(context).size;
     return Scaffold(
       backgroundColor: Colors.black,
       body: Padding(
@@ -40,11 +41,13 @@ class InvitationsDetailScreen extends StatelessWidget {
             Container(
               decoration: ShapeDecoration(
                   shape: WeirdBorder(radius: 20), color: Colors.white),
+              height: size.height * 0.9,
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.start,
                 crossAxisAlignment: CrossAxisAlignment.stretch,
+                mainAxisSize: MainAxisSize.min,
                 children: [
-                  Image.asset('someimage'),
+                  Image.asset('assets/home3.jpg'),
                   const SizedBox(
                     height: 80,
                   ),

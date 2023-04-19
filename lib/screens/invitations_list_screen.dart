@@ -1,5 +1,6 @@
-import 'package:event_point/screens/invitations_detail_screen.dart';
 import 'package:flutter/material.dart';
+
+import 'invitations_detail_screen.dart';
 
 class InvitationsListScreen extends StatefulWidget {
   const InvitationsListScreen({super.key});
@@ -41,7 +42,7 @@ class _InvitationsListScreenState extends State<InvitationsListScreen> {
                                 context,
                                 MaterialPageRoute(
                                     builder: ((context) =>
-                                        InvitationsDetailScreen())));
+                                        const InvitationsDetailScreen())));
                           },
                           alignment: Alignment.center,
                           icon: const Icon(Icons.chevron_left_outlined),
@@ -132,7 +133,7 @@ class NoInvitationWidget extends StatelessWidget {
           const SizedBox(
             height: 20,
           ),
-          Image.asset('someimage'),
+          Image.asset('assets/home1.jpg'),
         ],
       ),
     );
