@@ -3,8 +3,6 @@ import 'package:digital_invitation_card/screens/imageslider.dart';
 import 'package:flutter/material.dart';
 import 'package:digital_invitation_card/screens/notification.dart';
 
-import 'invitations_list_screen.dart';
-
 class HomepageScreen extends StatefulWidget {
   const HomepageScreen({super.key, required String phoneNumber});
 

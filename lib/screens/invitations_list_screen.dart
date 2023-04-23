@@ -148,23 +148,23 @@ class InvitationDetailCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Card(
-      margin: EdgeInsets.fromLTRB(25, 10, 25, 10),
+      margin: const EdgeInsets.fromLTRB(25, 10, 25, 10),
       elevation: 7,
       child: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
-            CircleAvatar(
+            const CircleAvatar(
               radius: 35,
             ),
-            SizedBox(
+            const SizedBox(
               width: 10,
             ),
             Expanded(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
+                children: const [
                   Text(
                     'BIRTHDAY PARTY',
                     style: TextStyle(
@@ -184,7 +184,7 @@ class InvitationDetailCard extends StatelessWidget {
             ),
             IconButton(
                 onPressed: () {},
-                icon: Icon(
+                icon: const Icon(
                   Icons.chevron_right_outlined,
                 ))
           ],

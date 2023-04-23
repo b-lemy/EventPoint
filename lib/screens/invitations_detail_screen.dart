@@ -28,7 +28,7 @@ class InvitationsDetailScreen extends StatelessWidget {
                   Navigator.push(
                       context,
                       MaterialPageRoute(
-                          builder: ((context) => InvitationsDetailScreen())));
+                          builder: ((context) => const InvitationsDetailScreen())));
                 },
                 alignment: Alignment.center,
                 icon: const Icon(Icons.chevron_left_outlined),

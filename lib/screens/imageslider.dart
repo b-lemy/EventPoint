@@ -13,7 +13,7 @@ class _SliderState extends State<ImageSlider> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Container(
+      body: SizedBox(
         height: MediaQuery.of(context).size.height * 0.2,
         width: double.maxFinite,
         child: CarouselSlider(
