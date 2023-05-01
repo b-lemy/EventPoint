@@ -39,6 +39,7 @@ dependencies:
   intl_phone_field: ^3.1.0
   introduction_screen: ^3.1.7
   carousel_slider: ^4.2.1
+  google_fonts: ^4.0.3
   
 
 dev_dependencies:
@@ -75,6 +76,7 @@ flutter:
       - assets/home1.jpg
       - assets/home2.jpg
       - assets/home3.jpg
+      - assets/barcode.webp
   #   - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see

@@ -31,9 +31,14 @@ migrate_working_dir/
 .pub-cache/
 .pub/
 /build/
+windows/
+windows/flutter/ephemeral/flutter_windows.dll.pdb
+linux/
+macos/
 
 # Web related
 lib/generated_plugin_registrant.dart
+
 
 # Symbolication related
 app.*.symbols
