@@ -1,3 +1,4 @@
+import 'package:digital_invitation_card/constants/assets_path.dart';
 import 'package:flutter/material.dart';
 
 import 'invitations_detail_screen.dart';
@@ -10,102 +11,197 @@ class InvitationsListScreen extends StatefulWidget {
 }
 
 class _InvitationsListScreenState extends State<InvitationsListScreen> {
+  bool isEventAvaliable = false;
   final double edgePadding = 30;
 
   @override
+  void initState() {
+    super.initState();
+    Future.delayed(const Duration(seconds: 8), () {
+      setState(() {
+        isEventAvaliable = true;
+      });
+    });
+  }
+
+  @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: Colors.black,
-      body: SafeArea(
-        child: Container(
-          color: Colors.black,
-          child: Column(
-            children: [
-              Expanded(
-                flex: 1,
-                child: Padding(
-                  padding: EdgeInsets.all(edgePadding),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Container(
-                        decoration: BoxDecoration(
-                          border: Border.all(
-                            color: Colors.white,
-                            width: 1.0,
-                          ),
-                        ),
-                        child: IconButton(
-                          onPressed: () {
-                            Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: ((context) =>
-                                        const InvitationsDetailScreen())));
-                          },
-                          alignment: Alignment.center,
-                          icon: const Icon(Icons.chevron_left_outlined),
-                          color: Colors.white,
-                        ),
-                      ),
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.stretch,
-                        children: const [
-                          Text(
-                            'INVITATION',
-                            style: TextStyle(
-                              color: Colors.white,
-                              fontSize: 24,
-                              fontWeight: FontWeight.w800,
-                            ),
-                          ),
-                          SizedBox(
-                            height: 20,
-                          ),
-                          Text(
-                            'Lorem Ipsum dolor sit amet veni vidi vici.',
-                            style: TextStyle(
-                              color: Colors.white,
-                              fontSize: 16,
-                              fontWeight: FontWeight.w300,
-                            ),
-                          ),
-                          SizedBox(
-                            height: 20,
-                          ),
-                        ],
-                      ),
-                    ],
-                  ),
-                ),
-              ),
-              Expanded(
-                flex: 2,
+    final Size size = MediaQuery.of(context).size;
+    return SafeArea(
+      child: Scaffold(
+        body: Column(
+          children: [
+            buildPageHeader(size),
+            buildBodyContents(),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget buildPageHeader(Size size) {
+    return Container(
+      height: size.height * 0.3,
+      width: double.infinity,
+      decoration: const BoxDecoration(
+        image: DecorationImage(
+          image: AssetImage(AssetsPath.homeImage),
+          fit: BoxFit.cover,
+        ),
+      ),
+      child: Padding(
+        padding: EdgeInsets.all(edgePadding),
+        child: Stack(
+          children: [
+            Positioned(
+              child: Align(
+                alignment: Alignment.topLeft,
                 child: Container(
-                  color: Colors.white,
-                  child: ListView(
-                    children: const [
-                      NoInvitationWidget(),
-                    ],
+                  decoration: BoxDecoration(
+                      border: Border.all(
+                        color: Colors.white,
+                        width: 1.0,
+                      ),
+                      borderRadius: BorderRadius.circular(10)),
+                  child: IconButton(
+                    onPressed: () {
+                      Navigator.pop(context);
+                    },
+                    alignment: Alignment.center,
+                    icon: const Icon(Icons.chevron_left_outlined),
+                    color: Colors.white,
                   ),
                 ),
               ),
+            ),
+            Positioned(
+              bottom: 0,
+              child: Align(
+                alignment: Alignment.bottomLeft,
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    Text('INVITATION',
+                        style: Theme.of(context)
+                            .textTheme
+                            .titleMedium!
+                            .copyWith(color: Colors.white)),
+                    const SizedBox(
+                      height: 20,
+                    ),
+                    Text('Lorem Ipsum dolor sit amet veni vidi vici.',
+                        style: Theme.of(context)
+                            .textTheme
+                            .titleSmall!
+                            .copyWith(color: Colors.white)),
+                  ],
+                ),
+              ),
+            )
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget buildBodyContents() {
+    return Padding(
+      padding: EdgeInsets.all(edgePadding),
+      child: isEventAvaliable
+          ? buildEventCard(
+              'BIRTHDAY PARTY',
+              'Irene Scarion 25th Birthaday Party  at Makumbusho Hall Kijitonyama',
+              '2022-11-14 1:55 PM')
+          : buildNoEventCard(),
+    );
+  }
+
+  Widget buildEventCard(String header, String body, String date) {
+    return Material(
+      elevation: 10,
+      borderRadius: BorderRadius.circular(10),
+      child: Container(
+        decoration: BoxDecoration(borderRadius: BorderRadius.circular(10)),
+        height: 130,
+        child: Padding(
+          padding: const EdgeInsets.only(
+            left: 16,
+            right: 16,
+            top: 16,
+            bottom: 16,
+          ),
+          child: Row(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              const CircleAvatar(
+                radius: 23,
+                backgroundColor: Color(0xFF3F3D56),
+              ),
+              const SizedBox(width: 14),
+              Expanded(
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      header,
+                      style: Theme.of(context)
+                          .textTheme
+                          .titleMedium!
+                          .copyWith(color: const Color(0xFF2A2C2E)),
+                    ),
+                    const SizedBox(height: 10),
+                    Flexible(
+                      child: Text(
+                        body,
+                        style: Theme.of(context)
+                            .textTheme
+                            .titleSmall!
+                            .copyWith(color: const Color(0xFF6B6C6D)),
+                        maxLines: 2,
+                        overflow: TextOverflow.clip,
+                      ),
+                    ),
+                    const SizedBox(height: 10),
+                    Text(
+                      date,
+                      style: Theme.of(context).textTheme.titleSmall!.copyWith(
+                            color: const Color(
+                              0xFF2F2E41,
+                            ),
+                            fontWeight: FontWeight.w200,
+                          ),
+                    ),
+                  ],
+                ),
+              ),
+              const SizedBox(width: 20),
+              Center(
+                child: GestureDetector(
+                  child: const Icon(
+                    Icons.navigate_next,
+                    color: Color(0xFF3C3F41),
+                    size: 25,
+                  ),
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => const InvitationsDetailScreen(),
+                      ),
+                    );
+                  },
+                ),
+              )
             ],
           ),
         ),
       ),
     );
   }
-}
 
-class NoInvitationWidget extends StatelessWidget {
-  const NoInvitationWidget({
-    Key? key,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
+  Widget buildNoEventCard() {
     return Padding(
       padding: const EdgeInsets.symmetric(
         vertical: 50,
@@ -113,21 +209,20 @@ class NoInvitationWidget extends StatelessWidget {
       ),
       child: Column(
         children: [
-          const Text(
-            'You have no invitations!',
-            style: TextStyle(
-              fontWeight: FontWeight.bold,
-              fontSize: 24,
-            ),
-          ),
+          Text('You have no invitations!',
+              style: Theme.of(context)
+                  .textTheme
+                  .titleMedium!
+                  .copyWith(color: const Color(0xFF3C3F41))),
           const SizedBox(
             height: 20,
           ),
-          const Text(
+          Text(
             'Lorem ipsum dolor sit amet.veni vidi vici. Lorem vici dolor vidi amet sit vici. Lorem ipsum dolor sit amet.',
-            style: TextStyle(
-              fontWeight: FontWeight.w300,
-            ),
+            style: Theme.of(context)
+                .textTheme
+                .titleSmall!
+                .copyWith(color: const Color(0xFF818181)),
             textAlign: TextAlign.center,
           ),
           const SizedBox(

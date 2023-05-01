@@ -2,6 +2,7 @@ import 'package:digital_invitation_card/screens/event.dart';
 import 'package:digital_invitation_card/screens/imageslider.dart';
 import 'package:flutter/material.dart';
 import 'package:digital_invitation_card/screens/notification.dart';
+import 'package:digital_invitation_card/screens/invitations_list_screen.dart';
 
 class HomepageScreen extends StatefulWidget {
   const HomepageScreen({super.key, required String phoneNumber});
@@ -34,7 +35,7 @@ class _HomepageScreenState extends State<HomepageScreen> {
                       icon: Icons.search,
                       label: "Invitations",
                       label2: "Managing Invitations",
-                      screenToNavigate: NotificationScreen()),
+                      screenToNavigate: InvitationsListScreen()),
                   MyButton(
                       icon: Icons.support_agent,
                       label: "Support",

@@ -1,3 +1,4 @@
+import 'package:digital_invitation_card/constants/assets_path.dart';
 import 'package:flutter/material.dart';
 
 class InvitationsDetailScreen extends StatelessWidget {
@@ -6,174 +7,146 @@ class InvitationsDetailScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final Size size = MediaQuery.of(context).size;
+    final paddingFromTop = size.height * 0.15;
     return Scaffold(
-      backgroundColor: Colors.black,
-      body: Padding(
-        padding: const EdgeInsets.symmetric(
-          vertical: 100,
-          horizontal: 40,
+      body: Container(
+        padding: const EdgeInsets.only(
+          top: 60,
+          right: 27,
+          left: 27,
         ),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
+        decoration: const BoxDecoration(
+          image: DecorationImage(
+              image: AssetImage(AssetsPath.homeImage), fit: BoxFit.cover),
+        ),
+        child: Stack(
           children: [
-            Container(
-              decoration: BoxDecoration(
-                border: Border.all(
-                  color: Colors.white,
-                  width: 1.0,
+            Positioned(
+              child: Align(
+                alignment: Alignment.topLeft,
+                child: Container(
+                  decoration: BoxDecoration(
+                      border: Border.all(
+                        color: Colors.white,
+                        width: 1.0,
+                      ),
+                      borderRadius: BorderRadius.circular(10)),
+                  child: IconButton(
+                    onPressed: () {
+                      Navigator.pop(context);
+                    },
+                    alignment: Alignment.center,
+                    icon: const Icon(Icons.chevron_left_outlined),
+                    color: Colors.white,
+                  ),
                 ),
               ),
-              child: IconButton(
-                onPressed: () {
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: ((context) =>
-                              const InvitationsDetailScreen())));
-                },
-                alignment: Alignment.center,
-                icon: const Icon(Icons.chevron_left_outlined),
-                color: Colors.white,
-              ),
             ),
-            const SizedBox(
-              height: 20,
-            ),
-            Container(
-              decoration: ShapeDecoration(
-                  shape: WeirdBorder(radius: 20), color: Colors.white),
-              height: size.height * 0.9,
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.start,
-                crossAxisAlignment: CrossAxisAlignment.stretch,
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  Image.asset('assets/home3.jpg'),
-                  const SizedBox(
-                    height: 80,
-                  ),
-                  Expanded(
-                    flex: 1,
-                    child: Center(
-                      heightFactor: 5,
-                      child: GridView(
-                        shrinkWrap: true,
-                        gridDelegate:
-                            const SliverGridDelegateWithFixedCrossAxisCount(
-                                crossAxisCount: 2),
-                        children: [
-                          Container(
-                            child: Column(children: const [
-                              Text('Some little heading'),
-                              SizedBox(
-                                height: 15,
-                              ),
-                              Text('The Detail',
-                                  style: TextStyle(
-                                      fontWeight: FontWeight.bold,
-                                      fontSize: 16))
-                            ]),
-                          ),
-                          Container(
-                            child: Column(children: const [
-                              Text('Some little heading'),
-                              SizedBox(
-                                height: 15,
-                              ),
-                              Text('The Detail',
-                                  style: TextStyle(
-                                      fontWeight: FontWeight.bold,
-                                      fontSize: 16))
-                            ]),
-                          ),
-                          Container(
-                            child: Column(children: const [
-                              Text('Some little heading'),
-                              SizedBox(
-                                height: 15,
-                              ),
-                              Text('The Detail',
-                                  style: TextStyle(
-                                      fontWeight: FontWeight.bold,
-                                      fontSize: 16))
-                            ]),
-                          ),
-                          Container(
-                            child: Column(children: const [
-                              Text('Some little heading'),
-                              SizedBox(
-                                height: 15,
-                              ),
-                              Text('The Detail',
-                                  style: TextStyle(
-                                      fontWeight: FontWeight.bold,
-                                      fontSize: 16))
-                            ]),
-                          ),
-                        ],
-                      ),
-                    ),
-                  )
-                ],
-              ),
-            )
+            Positioned(
+                top: paddingFromTop,
+                child: Align(
+                  alignment: Alignment.center,
+                  child: buildEventDetailCard(size, context),
+                )),
           ],
         ),
       ),
     );
   }
-}
 
-// This is the code for the card with corners inverted. For now it does both on top and bottom
-
-class WeirdBorder extends ShapeBorder {
-  final double radius;
-  final double pathWidth;
-
-  WeirdBorder({required this.radius, this.pathWidth = 1});
-
-  @override
-  EdgeInsetsGeometry get dimensions => EdgeInsets.zero;
-
-  @override
-  Path getInnerPath(Rect rect, {TextDirection? textDirection}) {
-    return Path()
-      ..fillType = PathFillType.nonZero
-      ..addPath(getOuterPath(rect, textDirection: textDirection), Offset.zero);
+  Widget buildEventDetailCard(Size size, BuildContext context) {
+    return Container(
+      decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(20), color: Colors.white),
+      height: size.height * 0.7,
+      width: size.width * 0.85,
+      child: Padding(
+        padding: const EdgeInsets.only(
+          top: 41,
+          left: 20,
+          right: 20,
+          bottom: 20,
+        ),
+        child: Column(
+          children: [
+            const Image(
+              image: AssetImage(AssetsPath.logo),
+              width: 68,
+              height: 68,
+            ),
+            const SizedBox(height: 68),
+            const Divider(),
+            const SizedBox(height: 32),
+            buildEventInfo(context),
+            const SizedBox(height: 32),
+            const Divider(),
+            buildBarCode('38hdhj6578', context)
+          ],
+        ),
+      ),
+    );
   }
 
-  @override
-  Path getOuterPath(Rect rect, {TextDirection? textDirection}) =>
-      _createPath(rect);
-
-  @override
-  void paint(Canvas canvas, Rect rect, {TextDirection? textDirection}) {}
-
-  @override
-  ShapeBorder scale(double t) => WeirdBorder(radius: radius);
-
-  Path _createPath(Rect rect) {
-    final innerRadius = radius + pathWidth;
-    final innerRect = Rect.fromLTRB(rect.left + pathWidth, rect.top + pathWidth,
-        rect.right - pathWidth, rect.bottom - pathWidth);
-
-    final outer = Path.combine(PathOperation.difference, Path()..addRect(rect),
-        _createBevels(rect, radius));
-    final inner = Path.combine(PathOperation.difference,
-        Path()..addRect(innerRect), _createBevels(rect, innerRadius));
-    return Path.combine(PathOperation.union, outer, inner);
+  Widget buildEventInfoColumn(
+      String label, String value, BuildContext context) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(
+          label,
+          style: Theme.of(context).textTheme.labelSmall!.copyWith(
+              color: const Color(0xFFC5B4B5), fontWeight: FontWeight.w600),
+        ),
+        const SizedBox(
+          height: 16,
+        ),
+        Text(
+          value,
+          style: Theme.of(context).textTheme.labelSmall!.copyWith(
+              color: const Color(0xFF382C2D), fontWeight: FontWeight.w600),
+        ),
+      ],
+    );
   }
 
-  Path _createBevels(Rect rect, double radius) {
-    return Path()
-      ..addOval(
-          Rect.fromCircle(center: Offset(rect.left, rect.top), radius: radius))
-      ..addOval(Rect.fromCircle(
-          center: Offset(rect.left + rect.width, rect.top), radius: radius))
-      ..addOval(Rect.fromCircle(
-          center: Offset(rect.left, rect.top + rect.height), radius: radius))
-      ..addOval(Rect.fromCircle(
-          center: Offset(rect.left + rect.width, rect.top + rect.height),
-          radius: radius));
+  Widget buildEventInfo(BuildContext context) {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      children: [
+        Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            buildEventInfoColumn('DATE & TIME', 'Feb 25, 11:30pm', context),
+            const SizedBox(height: 32),
+            buildEventInfoColumn('CARD TYPE', 'Double', context),
+          ],
+        ),
+        Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            buildEventInfoColumn('LOCATION', 'Safari Hall', context),
+            const SizedBox(height: 32),
+            buildEventInfoColumn('SEAT NUMBER', '23, 24', context),
+          ],
+        ),
+      ],
+    );
+  }
+
+  Widget buildBarCode(String cardCode, BuildContext context) {
+    return Column(children: [
+      Text(
+        'Card Code : $cardCode',
+        style: Theme.of(context)
+            .textTheme
+            .labelMedium!
+            .copyWith(color: const Color(0xFF382C2D)),
+      ),
+      const Image(
+        width: 300,
+        height: 80,
+        image: AssetImage(AssetsPath.barCode),
+      ),
+    ]);
   }
 }
