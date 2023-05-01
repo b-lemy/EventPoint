@@ -81,9 +81,7 @@ class _EventScreenState extends State<EventScreen> {
                                 firstDate: DateTime.now()
                                     .subtract(const Duration(days: 100)),
                                 lastDate: DateTime.now());
-                            if (date != null) {
-                              
-                             } 
+                            if (date != null) {}
                           },
                         ),
                         // suffix: const Icon(
