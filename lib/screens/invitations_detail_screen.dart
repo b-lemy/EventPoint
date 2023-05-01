@@ -115,6 +115,7 @@ class InvitationsDetailScreen extends StatelessWidget {
       ],
     );
   }
+  
 
   Widget buildEventInfo(BuildContext context) {
     return Row(
