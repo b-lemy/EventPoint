@@ -41,13 +41,20 @@ class InvitationsDetailScreen extends StatelessWidget {
                   ),
                 ),
               ),
-            ),
-            Positioned(
-                top: paddingFromTop,
-                child: Align(
-                  alignment: Alignment.center,
-                  child: buildEventDetailCard(size, context),
-                )),
+            )
+              //  child:IconButton(
+              //   onPressed: () {
+              //     Navigator.push(
+              //         context,
+              //         MaterialPageRoute(
+              //             builder: ((context) =>
+              //                 const InvitationsDetailScreen())));
+              //   },
+              //   alignment: Alignment.center,
+              //   child: buildEventDetailCard(size, context),
+              // ),
+            
+      
           ],
         ),
       ),
