@@ -21,18 +21,20 @@ class _SliderState extends State<ImageSlider> {
           items: [
             Image.asset(
               'assets/home3.jpg',
+              fit: BoxFit.cover,
             ),
             Image.asset(
               'assets/home1.jpg',
-              //fit: BoxFit.cover,
+              fit: BoxFit.cover,
             ),
             Image.asset(
               'assets/home2.jpg',
-              //fit: BoxFit.cover,
+              fit: BoxFit.cover,
             )
           ],
           options: CarouselOptions(
             autoPlay: true,
+            padEnds: false,
             enlargeFactor: 5.0,
             enlargeStrategy: CenterPageEnlargeStrategy.scale,
             enlargeCenterPage: true,

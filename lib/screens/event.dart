@@ -1,6 +1,16 @@
 import 'package:digital_invitation_card/screens/homepage.dart';
 import 'package:flutter/material.dart';
 
+String dateFromDatePicker = '';
+
+const List<String> list = <String>[
+  'Birthday',
+  'Wedding',
+  'Graduation',
+  // 'Baby Shower',
+  // 'Confirmation',
+];
+
 // class EventScreen extends StatefulWidget {
 //   const EventScreen({super.key});
 
@@ -53,9 +63,15 @@ class _EventScreenState extends State<EventScreen> {
               padding: const EdgeInsets.fromLTRB(8, 250, 8, 0),
               child: Column(
                 children: [
-                  TextFormField(
+                  DropdownButtonFormField<String>(
+                    items: list.map<DropdownMenuItem<String>>((String value) {
+                      return DropdownMenuItem<String>(
+                        value: value,
+                        child: Text(value),
+                      );
+                    }).toList(),
+                    onChanged: (value) {},
                     decoration: InputDecoration(
-                        suffixIcon: const Icon(Icons.arrow_drop_down),
                         hintText: "Select Event Type",
                         focusedBorder: const OutlineInputBorder(
                             borderSide: BorderSide(color: Color(0xFFFCB549))),
@@ -63,10 +79,23 @@ class _EventScreenState extends State<EventScreen> {
                           borderRadius: BorderRadius.circular(6),
                         )),
                   ),
+                  // TextFormField(
+                  //   decoration: InputDecoration(
+                  //       suffixIcon: const Icon(Icons.arrow_drop_down),
+                  //       hintText: "Select Event Type",
+                  //       focusedBorder: const OutlineInputBorder(
+                  //           borderSide: BorderSide(color: Color(0xFFFCB549))),
+                  //       border: OutlineInputBorder(
+                  //         borderRadius: BorderRadius.circular(6),
+                  //       )),
+                  // ),
                   const SizedBox(
                     height: 10.0,
                   ),
                   TextFormField(
+                    controller: TextEditingController(
+                      text: dateFromDatePicker,
+                    ),
                     decoration: InputDecoration(
                         hintText: "Select Date",
                         suffixIcon: IconButton(
@@ -80,8 +109,16 @@ class _EventScreenState extends State<EventScreen> {
                                 initialDate: DateTime.now(),
                                 firstDate: DateTime.now()
                                     .subtract(const Duration(days: 100)),
-                                lastDate: DateTime.now());
-                            if (date != null) {}
+                                lastDate: DateTime(3000, 12, 12));
+                            if (date != null) {
+                              setState(() {
+                                dateFromDatePicker = date.day.toString();
+                                dateFromDatePicker += "/";
+                                dateFromDatePicker += date.month.toString();
+                                dateFromDatePicker += "/";
+                                dateFromDatePicker += date.year.toString();
+                              });
+                            }
                           },
                         ),
                         // suffix: const Icon(
@@ -130,7 +167,46 @@ class _EventScreenState extends State<EventScreen> {
                       borderRadius: BorderRadius.circular(8.0),
                     ),
                     child: ElevatedButton(
-                      onPressed: () {},
+                      onPressed: () => showDialog<String>(
+                        context: context,
+                        builder: (BuildContext context) => AlertDialog(
+                          alignment: Alignment.bottomCenter,
+                          contentPadding:
+                              const EdgeInsets.symmetric(horizontal: 40),
+                          title: Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Image.asset('assets/tick.png'),
+                              const SizedBox(
+                                height: 8,
+                              ),
+                              const Text('Successful'),
+                            ],
+                          ),
+                          content: const Text(
+                            'Congratulations! Your event is created.',
+                            textAlign: TextAlign.center,
+                            style: TextStyle(
+                              fontSize: 10,
+                              fontWeight: FontWeight.w100,
+                            ),
+                          ),
+                          actions: <Widget>[
+                            ElevatedButton(
+                              onPressed: () => Navigator.pop(context, 'Cancel'),
+                              child: const Text('OK'),
+                              style: ElevatedButton.styleFrom(
+                                backgroundColor: const Color(0xFF3D4245),
+                                fixedSize:
+                                    Size(double.maxFinite, double.minPositive),
+                                padding: EdgeInsets.symmetric(
+                                  vertical: 7,
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
                       style: ElevatedButton.styleFrom(
                           primary: const Color(0xFF3D4245)),
                       child: const Text(
@@ -211,7 +287,7 @@ class _EventScreenState extends State<EventScreen> {
                     children: [
                       Container(
                         padding: const EdgeInsets.symmetric(
-                            vertical: 10.0, horizontal: 40.0),
+                            vertical: 10.0, horizontal: 36.0),
                         child: const Text(
                           "create event",
                           style: TextStyle(fontSize: 16.0),
@@ -219,7 +295,7 @@ class _EventScreenState extends State<EventScreen> {
                       ),
                       Container(
                         padding: const EdgeInsets.symmetric(
-                            vertical: 10.0, horizontal: 40.0),
+                            vertical: 10.0, horizontal: 36.0),
                         child: const Text(
                           "manage events",
                           style: TextStyle(fontSize: 16.0),

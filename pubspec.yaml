@@ -77,6 +77,12 @@ flutter:
       - assets/home2.jpg
       - assets/home3.jpg
       - assets/barcode.webp
+      - assets/tick.png
+      - assets/Setting.png
+      - assets/Exclude.png
+      - assets/ic_baseline-contact-support.png
+      - assets/profile.jpg
+
   #   - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see
