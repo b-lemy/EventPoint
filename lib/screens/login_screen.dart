@@ -71,7 +71,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   onPressed: () => {},
                   child: const Text(
                     "Forgot Password",
-                    style: TextStyle(color: Color(0xFFFCB549)),
+                    style: TextStyle(color: Color(0xFFFCB549,  )),
                   ),
                 )
               ],
